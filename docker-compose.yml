@@ -1,0 +1,26 @@
+services:
+  postgresql:
+    build:
+      context: ./
+      dockerfile: ./postgresql/Dockerfile
+    container_name: postgresql
+    working_dir: /
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      PGTZ: Europe/Kiev
+    volumes:
+      - ./volumes/var/lib/postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+  cron:
+    build:
+      context: ./
+      dockerfile: cron/Dockerfile
+    container_name: cron
+    working_dir: /
+    restart: always
+    volumes:
+      - ./volumes/var/log/currency-exchange-rate-scraper:/var/log/currency-exchange-rate-scraper

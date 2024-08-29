@@ -1,0 +1,3 @@
+PATH=/bin
+
+*/20 * * * * cd /opt/currency-exchange-rate-scraper && java -jar currency-exchange-rate-scraper.jar >> /var/log/currency-exchange-rate-scraper/cron-output-$(date +\%Y-\%m-\%d).log 2>&1
